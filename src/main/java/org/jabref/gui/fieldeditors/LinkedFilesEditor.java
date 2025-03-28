@@ -258,6 +258,11 @@ public class LinkedFilesEditor extends HBox implements FieldEditorFX {
                         deleteAttachedFilesWithConfirmation();
                         event.consume();
                         break;
+
+                    case REPLACE_STRING:
+                        listView.getSelectionModel().getSelectedItems().forEach(LinkedFileViewModel::askForNameAndRename);
+                        event.consume();
+
                     default:
                         // Pass other keys to children
                 }
@@ -283,6 +288,10 @@ public class LinkedFilesEditor extends HBox implements FieldEditorFX {
     @Override
     public Parent getNode() {
         return this;
+    }
+
+    public ListView<LinkedFileViewModel> getListView() {
+        return listView;
     }
 
     @FXML
